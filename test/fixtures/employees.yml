@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  certification: MyString
+  hourly_rate: 9.99
+  user: 
+
+two:
+  certification: MyString
+  hourly_rate: 9.99
+  user: 

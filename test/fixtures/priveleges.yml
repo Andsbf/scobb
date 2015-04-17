@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  privilege1: false
+  privele2: false
+  priveleges3: false
+  priveleges4: false
+
+two:
+  privilege1: false
+  privele2: false
+  priveleges3: false
+  priveleges4: false

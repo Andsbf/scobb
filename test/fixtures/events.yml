@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_id: 
+  course_id: 
+  start_time: 2015-04-16 21:07:02
+
+two:
+  employee_id: 
+  course_id: 
+  start_time: 2015-04-16 21:07:02

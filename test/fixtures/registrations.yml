@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  payment_id: 
+  client_id: 
+  dependant_id: 
+  course_id: 
+
+two:
+  payment_id: 
+  client_id: 
+  dependant_id: 
+  course_id: 

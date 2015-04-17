@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_id: 
+  hours: 9.99
+  total: 9.99
+  is_paid: false
+  payment_method: MyString
+  payment_date: 2015-04-16
+
+two:
+  employee_id: 
+  hours: 9.99
+  total: 9.99
+  is_paid: false
+  payment_method: MyString
+  payment_date: 2015-04-16

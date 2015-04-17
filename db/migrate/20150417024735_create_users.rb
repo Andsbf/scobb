@@ -10,6 +10,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :gender
       t.string :address
       t.text :notes
+      t.string :user_type
+      t.string :address
+      t.string :password_digest
 
       t.timestamps null: false
     end

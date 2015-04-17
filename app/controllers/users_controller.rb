@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def index
-    @message = 'Hello World!'
+     @users = User.all
+     render json: @users
   end
 
   def new

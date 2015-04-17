@@ -1,4 +1,60 @@
 Rails.application.routes.draw do
+  get 'events/new'
+
+  get 'events/index'
+
+  get 'events/create'
+
+  get 'events/update'
+
+  get 'events/edit'
+
+  get 'events/show'
+
+  get 'events/destroy'
+
+  get 'registration/new'
+
+  get 'registration/index'
+
+  get 'registration/create'
+
+  get 'registration/edit'
+
+  get 'registration/destroy'
+
+  get 'registration/show'
+
+  get 'registration/update'
+
+  get 'employee/index'
+
+  get 'employee/new'
+
+  get 'employee/create'
+
+  get 'employee/update'
+
+  get 'employee/edit'
+
+  get 'employee/show'
+
+  get 'employee/destroy'
+
+  get 'clients/index'
+
+  get 'clients/new'
+
+  get 'clients/create'
+
+  get 'clients/update'
+
+  get 'clients/show'
+
+  get 'clients/destroy'
+
+  get 'clients/edit'
+
   get 'users/index'
 
   get 'users/new'
