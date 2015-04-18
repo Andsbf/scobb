@@ -11,7 +11,7 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render nothing: true, status: :ok
+      render json: 'ok'
     else
       render json: 'error'
     end
@@ -29,7 +29,7 @@ class Api::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    render json: @user, root: "users"
+    render json: @user
   end
 
   def destroy
@@ -37,7 +37,7 @@ class Api::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render json: @user, root: "users"
+    render json: @user
   end
 
   def user_params
