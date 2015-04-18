@@ -18,6 +18,8 @@ class Api::RegistrationsController < ApplicationController
   end
 
   def show
+    @registration = Registration.find(params[:id])
+    render json: @registration
   end
 
   def update

@@ -14,6 +14,8 @@ class Api::PaymentsController < ApplicationController
   end
 
   def show
+    @payment = Payment.find(params[:id])
+    render json: @payment
   end
 
   def update

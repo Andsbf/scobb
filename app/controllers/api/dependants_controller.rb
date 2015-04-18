@@ -1,7 +1,7 @@
 class Api::DependantsController < ApplicationController
   def index
-    @depedants = Dependant.all
-    render json: @depedants
+    @dependants = Dependant.all
+    render json: @dependants
   end
 
   def new
@@ -14,6 +14,8 @@ class Api::DependantsController < ApplicationController
   end
 
   def show
+    @dependant = Dependant.find(params[:id])
+    render json: @dependant
   end
 
   def update

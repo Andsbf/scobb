@@ -14,6 +14,8 @@ class Api::PrivilegesController < ApplicationController
   end
 
   def show
+    @privilege = Privilege.find(params[:id])
+    render json: @privilege
   end
 
   def update

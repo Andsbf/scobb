@@ -17,6 +17,8 @@ class Api::EmployeesController < ApplicationController
   end
 
   def show
+    @employee = Employee.find(params[:id])
+    render json: @employee
   end
 
   def destroy

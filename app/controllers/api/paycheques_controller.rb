@@ -14,6 +14,8 @@ class Api::PaychequesController < ApplicationController
   end
 
   def show
+    @paycheque = Paycheque.find(params[:id])
+    render json: @paycheque
   end
 
   def update
