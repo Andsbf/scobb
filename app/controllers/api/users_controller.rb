@@ -13,7 +13,7 @@ class Api::UsersController < ApplicationController
     if @user.save
       render json: 'ok'
     else
-      render :new 'error'
+      render json: 'error'
     end
   end
 
