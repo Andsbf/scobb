@@ -29,7 +29,7 @@ class Api::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    render json: @users
+    render json: @user, root: "users"
   end
 
   def destroy
@@ -37,7 +37,7 @@ class Api::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render json: @user.as_json
+    render json: @user, root: "users"
   end
 
   def user_params
