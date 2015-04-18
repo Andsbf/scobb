@@ -1,73 +1,17 @@
 Rails.application.routes.draw do
-  get 'events/new'
+  
+  namespace  :api do
+    resources :events
 
-  get 'events/index'
+    resources :registrations
 
-  get 'events/create'
+    resources :employees
 
-  get 'events/update'
+    resources :clients
 
-  get 'events/edit'
-
-  get 'events/show'
-
-  get 'events/destroy'
-
-  get 'registration/new'
-
-  get 'registration/index'
-
-  get 'registration/create'
-
-  get 'registration/edit'
-
-  get 'registration/destroy'
-
-  get 'registration/show'
-
-  get 'registration/update'
-
-  get 'employee/index'
-
-  get 'employee/new'
-
-  get 'employee/create'
-
-  get 'employee/update'
-
-  get 'employee/edit'
-
-  get 'employee/show'
-
-  get 'employee/destroy'
-
-  get 'clients/index'
-
-  get 'clients/new'
-
-  get 'clients/create'
-
-  get 'clients/update'
-
-  get 'clients/show'
-
-  get 'clients/destroy'
-
-  get 'clients/edit'
-
-  get 'users/index'
-
-  get 'users/new'
-
-  get 'users/create'
-
-  get 'users/update'
-
-  get 'users/edit'
-
-  get 'users/destroy'
-
-  get 'users/show'
+    resources :users  
+  end
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

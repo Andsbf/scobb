@@ -1,4 +1,5 @@
 class Course < ActiveRecord::Base
-  belongs_to :employee
   belongs_to :category
+
+  has_many :events
 end

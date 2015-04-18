@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417040702) do
+ActiveRecord::Schema.define(version: 20150418033525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20150417040702) do
   add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 
   create_table "courses", force: :cascade do |t|
-    t.integer  "employee_id"
     t.integer  "category_id"
     t.string   "name"
     t.integer  "capacity"
@@ -43,7 +42,6 @@ ActiveRecord::Schema.define(version: 20150417040702) do
   end
 
   add_index "courses", ["category_id"], name: "index_courses_on_category_id", using: :btree
-  add_index "courses", ["employee_id"], name: "index_courses_on_employee_id", using: :btree
 
   create_table "dependants", force: :cascade do |t|
     t.integer  "client_id"
@@ -95,7 +93,6 @@ ActiveRecord::Schema.define(version: 20150417040702) do
   add_index "paycheques", ["employee_id"], name: "index_paycheques_on_employee_id", using: :btree
 
   create_table "payments", force: :cascade do |t|
-    t.boolean  "is_paid"
     t.date     "date"
     t.decimal  "total"
     t.datetime "created_at", null: false
@@ -143,7 +140,6 @@ ActiveRecord::Schema.define(version: 20150417040702) do
 
   add_foreign_key "clients", "users"
   add_foreign_key "courses", "categories"
-  add_foreign_key "courses", "employees"
   add_foreign_key "dependants", "clients"
   add_foreign_key "employees", "priveleges"
   add_foreign_key "events", "courses"

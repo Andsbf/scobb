@@ -1,4 +1,4 @@
-class EventsController < ApplicationController
+class Api::EventsController < ApplicationController
   def new
   end
 
