@@ -11,16 +11,25 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: 'ok'
+      render nothing: true, status: :ok
     else
       render json: 'error'
     end
   end
 
   def update
+     @user = User.find(params[:id])
+
+    if @user.update_attributes(user_params)
+      render json: 'ok'
+    else
+      render json: 'error'
+    end
   end
 
   def edit
+    @user = User.find(params[:id])
+    render json: @users
   end
 
   def destroy
@@ -28,6 +37,23 @@ class Api::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render json: @user
+    render json: @user.as_json
   end
+
+  def user_params
+    params.require(:user).permit(
+      :first_name,
+      :last_name,
+      :email,
+      :phone,
+      :phone_alternate,
+      :birthday,
+      :gender,
+      :address,
+      :notes,
+      :user_type,
+      :password,
+      :password_confirmation)
+  end
+
 end
