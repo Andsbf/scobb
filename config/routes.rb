@@ -1,13 +1,26 @@
 Rails.application.routes.draw do
-  
-  namespace  :api do
-    resources :events
 
-    resources :registrations
+  namespace  :api do
+
+    resources :categories
+
+    resources :clients
+
+    resources :courses
+
+    resources :dependants
 
     resources :employees
 
-    resources :clients
+    resources :events
+
+    resources :paycheques
+
+    resources :payments
+
+    resources :privileges
+    
+    resources :registrations
 
     resources :users  
   end

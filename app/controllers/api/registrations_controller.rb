@@ -1,8 +1,11 @@
-class Api::RegistrationController < ApplicationController
+class Api::RegistrationsController < ApplicationController
   def new
+     
   end
 
   def index
+    @registrations = Registration.all
+     render json: @registrations
   end
 
   def create

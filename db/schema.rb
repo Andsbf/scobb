@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418033525) do
+ActiveRecord::Schema.define(version: 20150418185621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20150418033525) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "priveleges", force: :cascade do |t|
+  create_table "privileges", force: :cascade do |t|
     t.boolean  "privileges1"
     t.boolean  "priveleges2"
     t.boolean  "priveleges3"
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 20150418033525) do
   add_foreign_key "clients", "users"
   add_foreign_key "courses", "categories"
   add_foreign_key "dependants", "clients"
-  add_foreign_key "employees", "priveleges"
+  add_foreign_key "employees", "privileges", column: "privelege_id"
   add_foreign_key "events", "courses"
   add_foreign_key "events", "employees"
   add_foreign_key "paycheques", "employees"
