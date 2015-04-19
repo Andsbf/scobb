@@ -4,7 +4,7 @@ class Client < ActiveRecord::Base
   has_many :registrations
   has_many :payments, through: :registrations
 
-  def dependants_ids
+  def dependant
     self.dependants.pluck(:id)
   end
 
