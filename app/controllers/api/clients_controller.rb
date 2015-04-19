@@ -16,8 +16,8 @@ class Api::ClientsController < ApplicationController
 
   def show
     @client = Client.find(params[:id])
-    render json: @client #.as_json(root: true, :methods => [:dependant] ), status: 200
-    # .merge(:dependants => @client.dependants.pluck(:id)) 
+    render json: @client 
+    
   end
 
   def destroy

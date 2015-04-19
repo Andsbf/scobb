@@ -1,3 +1,3 @@
 class Payment < ActiveRecord::Base
-  has_one :resgistration
+  has_one :registration
 end

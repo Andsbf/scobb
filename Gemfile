@@ -33,7 +33,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 # Serializers brings convention over configuration to your JSON generation.
-gem 'active_model_serializers'
+gem 'active_model_serializers', '~> 0.9.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
