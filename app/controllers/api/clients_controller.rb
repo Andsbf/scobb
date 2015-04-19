@@ -2,7 +2,7 @@ class Api::ClientsController < ApplicationController
   def index
     # @clients = Client.all.to_json ({:include => :dependants})
     @clients = Client.all
-    render json: @clients
+    render json: @clients 
   end
 
   def new
@@ -16,7 +16,7 @@ class Api::ClientsController < ApplicationController
 
   def show
     @client = Client.find(params[:id])
-    render json: @client
+    render json: @client.as_json.merge(:dependants => @client.dependants.pluck(:id))
   end
 
   def destroy

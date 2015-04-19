@@ -4,4 +4,5 @@ class Client < ActiveRecord::Base
   has_many :registrations
   has_many :payments, through: :registrations
 
+
 end

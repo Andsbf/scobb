@@ -4,11 +4,9 @@ Rails.application.routes.draw do
 
     resources :categories
 
-    resources :clients
-
     resources :courses
 
-    resources :dependants
+    
 
     resources :employees
 
@@ -22,7 +20,15 @@ Rails.application.routes.draw do
     
     resources :registrations
 
-    resources :users  
+    resources :clients do |i|
+        resources :dependants
+    end
+
+    resources :employees
+
+    resources :users
+
+
   end
   
 
