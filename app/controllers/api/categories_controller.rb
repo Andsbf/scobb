@@ -4,13 +4,7 @@ class Api::CategoriesController < ApplicationController
    render json: @categories
   end
 
-  def new
-  end
-
   def create
-  end
-
-  def edit
   end
 
   def update
@@ -22,5 +16,7 @@ class Api::CategoriesController < ApplicationController
   end
 
   def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
   end
 end

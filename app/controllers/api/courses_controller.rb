@@ -1,20 +1,23 @@
 class Api::CoursesController < ApplicationController
-  def index
-   @courses = Course.all
-   render json: @courses
+  
+  before_action :category_courses
+  skip_before_action :category_courses, only: [:all]
+
+  def all
+    @courses = Course.all
+    render json: @courses
   end
 
-  def new
+  def index
+   @courses = @category_courses
+   render json: @courses
   end
 
   def create
   end
 
-  def edit
-  end
-
   def show
-    @course = Course.find(params[:id])
+    @course = @category_courses.find(params[:id])
     render json: @course
   end
 
@@ -22,5 +25,16 @@ class Api::CoursesController < ApplicationController
   end
 
   def destroy
+    @course = Course.find(params[:id])
+    @course.destroy
   end
+
+  protected
+
+  def category_courses
+    @category = Category.find(params[:category_id])
+    @category_courses = Course.where(category: @category)
+  end
+
+
 end
