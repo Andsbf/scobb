@@ -16,7 +16,7 @@ class Api::ClientsController < ApplicationController
 
   def show
     @client = Client.find(params[:id])
-    render json: @client.as_json.merge(:dependants => @client.dependants.pluck(:id))
+    render json: @client.as_json(root: true).merge(:dependants => @client.dependants.pluck(:id)) 
   end
 
   def destroy
