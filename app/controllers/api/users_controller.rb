@@ -8,7 +8,13 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    
+    first_name = params['user']['first_name']
+    last_name = params['user']['last_name']
+    email = params['user']['email']
+    password = '123456'
+    password_confirmation = '123456'
+    @user = User.create(first_name: first_name, last_name: last_name, email: email, password: password,password_confirmation: password_confirmation)
 
     if @user.save
       render json: 'ok'

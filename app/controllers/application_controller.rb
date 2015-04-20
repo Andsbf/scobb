@@ -3,5 +3,5 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   include ActionController::Serialization
   
-  protect_from_forgery with: :exception
+  # protect_from_forgery with: :exception
 end
