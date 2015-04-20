@@ -9,12 +9,8 @@ class Api::UsersController < ApplicationController
 
   def create
     
-    first_name = params['user']['first_name']
-    last_name = params['user']['last_name']
-    email = params['user']['email']
-    password = '123456'
-    password_confirmation = '123456'
-    @user = User.create(first_name: first_name, last_name: last_name, email: email, password: password,password_confirmation: password_confirmation)
+    user_params_temp = user_params.merge(password: '123456',password_confirmation: '123456')    
+    @user = User.new(user_params_temp)
 
     if @user.save
       render json: 'ok'
@@ -39,6 +35,9 @@ class Api::UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    render json: '#{@user.first_name} deleted', status: 200
   end
 
   def show
