@@ -17,9 +17,9 @@ class Api::DependantsController < ApplicationController
     @dependant = Dependant.new(dependant_params)
 
     if @dependant.save
-      render json: 'ok', status: 200
+      render json: @dependant, status: 200
     else
-      render json: "", status: 400
+      render json: {}, status: 400
     end
   end
 
@@ -32,16 +32,16 @@ class Api::DependantsController < ApplicationController
     @dependant = Dependant.find(params[:id])
 
     if @dependant.update_attributes(dependant_params)
-      render json: 'ok'
+      render json: @dependant, status: 200
     else
-      render json: 'error'
+      render json: {}, status: 400
     end
   end
 
   def destroy
     @dependant = Dependant.find(params[:id])
     @dependant.destroy
-    render json: 'ok', status: 200
+    render json: {}, status: 200
   end
 
   private

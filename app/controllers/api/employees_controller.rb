@@ -9,9 +9,9 @@ class Api::EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
 
     if @employee.save
-      render json: 'ok', status: 200
+      render json: @employee, status: 200
     else
-      render json: "", status: 400
+      render json: {}, status: 400
     end
   end
 
@@ -19,9 +19,9 @@ class Api::EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
 
     if @employee.update_attributes(employee_params)
-      render json: 'ok'
+      render json: @employee, status: 200
     else
-      render json: 'error'
+      render json: {}, status: 400
     end
   end
 
@@ -33,7 +33,7 @@ class Api::EmployeesController < ApplicationController
   def destroy
     @employee = Employee.find(params[:id])
     @employee.destroy
-    render json: 'ok', status: 200
+    render json: {}, status: 200
   end
 
   private

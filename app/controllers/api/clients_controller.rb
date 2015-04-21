@@ -8,9 +8,9 @@ class Api::ClientsController < ApplicationController
     @client = Client.new(client_params)
 
     if @client.save
-      render json: 'ok', status: 200
+      render json: @client, status: 200
     else
-      render json: "", status: 400
+      render json: {}, status: 400
     end
   end
 
@@ -18,9 +18,9 @@ class Api::ClientsController < ApplicationController
     @client = Client.find(params[:id])
 
     if @client.update_attributes(client_params)
-      render json: 'ok'
+      render json: @client, status: 200
     else
-      render json: 'error'
+      render json: {}, status: 400
     end
   end
 
@@ -32,7 +32,7 @@ class Api::ClientsController < ApplicationController
   def destroy
     @client = Client.find(params[:id])
     @client.destroy
-    render json: 'ok', status: 200
+    render json: {}, status: 200
   end
 
   private

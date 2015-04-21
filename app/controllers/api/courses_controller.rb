@@ -17,9 +17,9 @@ class Api::CoursesController < ApplicationController
     @course = Course.new(course_params)
 
     if @course.save
-      render json: 'ok', status: 200
+      render json: @dependant, status: 200
     else
-      render json: "", status: 400
+      render json: {}, status: 400
     end
   end
 
@@ -32,16 +32,16 @@ class Api::CoursesController < ApplicationController
     @course = course.find(params[:id])
 
     if @course.update_attributes(course_params)
-      render json: 'ok'
+      render json: @dependant, status: 200
     else
-      render json: 'error'
+      render json: {}, status: 400
     end
   end
 
   def destroy
     @course = Course.find(params[:id])
     @course.destroy
-    render json: 'ok', status: 200
+    render json: {}, status: 200
   end
 
   private

@@ -2,7 +2,7 @@ class Api::PaymentsController < ApplicationController
   
   def index
     @payments = Payment.all
-    render json: @payments
+    render json: @payments, status: 200
   end
 
   def create
@@ -14,15 +14,25 @@ class Api::PaymentsController < ApplicationController
   end
 
   def update
+    @payment = Payment.find(params[:id])
+
+    if @payment.update_attributes(payment_params)
+      render json: @payment, status: 200
+    else
+      render json: {}, status: 404
+    end
   end
 
   def destroy
+    @payment = Payment.find(params[:id])
+    @payment.destroy
+    render json: {}, status: 200
   end
 
  private
 
-  def paycheque_params
-    params.require(:paycheque).permit(
+  def payment_params
+    params.require(:payment).permit(
       :employee_id,
       :hours,
       :total,

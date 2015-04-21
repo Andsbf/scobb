@@ -4,21 +4,21 @@ class Api::EventsController < ApplicationController
 
   def all
     @events = Event.all
-    render json: @events
+    render json: @events, status: 200
   end
 
   def index
     @events = @course_events
-     render json: @events
+     render json: @events, status: 200
   end
 
   def create
     @event = Event.new(event_params)
 
     if @event.save
-      render json: 'ok', status: 200
+      render json: @event, status: 200
     else
-      render json: "", status: 400
+      render json: {}, status: 400
     end
   end
 
@@ -26,9 +26,9 @@ class Api::EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if @event.update_attributes(event_params)
-      render json: 'ok'
+      render json: @event, status: 200
     else
-      render json: 'error'
+      render json: {}, status: 400
     end
   end
 
@@ -40,7 +40,7 @@ class Api::EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-    render json: 'ok', status: 200
+    render json: {}, status: 200
   end
 
   private
