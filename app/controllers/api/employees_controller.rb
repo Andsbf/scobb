@@ -6,9 +6,23 @@ class Api::EmployeesController < ApplicationController
   end
 
   def create
+    @employee = Employee.new(employee_params)
+
+    if @employee.save
+      render json: 'ok', status: 200
+    else
+      render json: "", status: 400
+    end
   end
 
   def update
+    @employee = Employee.find(params[:id])
+
+    if @employee.update_attributes(employee_params)
+      render json: 'ok'
+    else
+      render json: 'error'
+    end
   end
 
   def show
@@ -17,5 +31,19 @@ class Api::EmployeesController < ApplicationController
   end
 
   def destroy
+    @employee = Employee.find(params[:id])
+    @employee.destroy
+    render json: 'ok', status: 200
   end
+
+  private
+
+    def employee_params
+      params.require(:employee).permit(
+        :certification,
+        :hourly_rate,
+        :user_id,
+        :privelege_id
+      )
+    end
 end

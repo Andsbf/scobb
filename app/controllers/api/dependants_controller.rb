@@ -7,15 +7,21 @@ class Api::DependantsController < ApplicationController
     @dependants = Dependant.all
     render json: @dependants
   end
-
+  #display all for parent client_id
   def index
     @dependants = Dependant.where(client: @client)
     render json: @dependants
   end
 
   def create
-  end
+    @dependant = Dependant.new(dependant_params)
 
+    if @dependant.save
+      render json: 'ok', status: 200
+    else
+      render json: "", status: 400
+    end
+  end
 
   def show
     @dependant = Dependant.find(params[:id])
@@ -23,16 +29,35 @@ class Api::DependantsController < ApplicationController
   end
 
   def update
+    @dependant = Dependant.find(params[:id])
+
+    if @dependant.update_attributes(dependant_params)
+      render json: 'ok'
+    else
+      render json: 'error'
+    end
   end
 
   def destroy
+    @dependant = Dependant.find(params[:id])
+    @dependant.destroy
+    render json: 'ok', status: 200
   end
 
-  protected
+  private
 
-  def load_client
-    @client = Client.find(params[:client_id])
-  end
+    def load_client
+      @client = Client.find(params[:client_id])
+    end
 
-
+    def dependant_params
+      params.require(:dependant).permit(
+        :client_id,
+        :first_name,
+        :last_name,
+        :birthday,
+        :gender,
+        :notes
+      )
+    end
 end

@@ -14,6 +14,13 @@ class Api::CoursesController < ApplicationController
   end
 
   def create
+    @course = Course.new(course_params)
+
+    if @course.save
+      render json: 'ok', status: 200
+    else
+      render json: "", status: 400
+    end
   end
 
   def show
@@ -22,19 +29,34 @@ class Api::CoursesController < ApplicationController
   end
 
   def update
+    @course = course.find(params[:id])
+
+    if @course.update_attributes(course_params)
+      render json: 'ok'
+    else
+      render json: 'error'
+    end
   end
 
   def destroy
     @course = Course.find(params[:id])
     @course.destroy
+    render json: 'ok', status: 200
   end
 
-  protected
+  private
 
   def category_courses
     @category = Category.find(params[:category_id])
     @category_courses = Course.where(category: @category)
   end
 
-
+  def course_params
+    params.require(:course).permit(
+      :category_id,
+      :name,
+      :capacity,
+      :session_cost
+    )
+  end
 end

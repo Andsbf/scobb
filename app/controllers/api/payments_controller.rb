@@ -18,4 +18,17 @@ class Api::PaymentsController < ApplicationController
 
   def destroy
   end
+
+ private
+
+  def paycheque_params
+    params.require(:paycheque).permit(
+      :employee_id,
+      :hours,
+      :total,
+      :is_paid,
+      :payment_method,
+      :payment_date
+    )
+  end
 end

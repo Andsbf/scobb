@@ -4,18 +4,15 @@ class Api::UsersController < ApplicationController
      render json: @users
   end
 
-  def new
-  end
-
   def create
     
     user_params_temp = user_params.merge(password: '123456',password_confirmation: '123456')    
     @user = User.new(user_params_temp)
 
     if @user.save
-      render json: 'ok'
+      render json: @user, status: 200
     else
-      render json: "", status: 404
+      render json: {}, status: 404
     end
   end
 
@@ -23,27 +20,24 @@ class Api::UsersController < ApplicationController
      @user = User.find(params[:id])
 
     if @user.update_attributes(user_params)
-      render json: 'ok'
+      render json: @user, status: 200
     else
-      render json: 'error'
+      render json: {}, status: 404
     end
-  end
-
-  def edit
-    @user = User.find(params[:id])
-    render json: @user
   end
 
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    render json: '#{@user.first_name} deleted', status: 200
+    render json: {}, status: 200
   end
 
   def show
     @user = User.find(params[:id])
-    render json: @user
+    render json: @user, status: 200
   end
+
+  private
 
   def user_params
     params.require(:user).permit(

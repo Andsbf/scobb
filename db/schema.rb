@@ -138,7 +138,6 @@ ActiveRecord::Schema.define(version: 20150418185621) do
     t.datetime "updated_at",      null: false
   end
 
-  add_foreign_key "clients", "users"
   add_foreign_key "courses", "categories"
   add_foreign_key "dependants", "clients"
   add_foreign_key "employees", "privileges", column: "privelege_id"

@@ -13,10 +13,23 @@ class Api::EventsController < ApplicationController
   end
 
   def create
+    @event = Event.new(event_params)
 
+    if @event.save
+      render json: 'ok', status: 200
+    else
+      render json: "", status: 400
+    end
   end
 
   def update
+    @event = Event.find(params[:id])
+
+    if @event.update_attributes(event_params)
+      render json: 'ok'
+    else
+      render json: 'error'
+    end
   end
 
   def show
@@ -26,11 +39,23 @@ class Api::EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
-    @client.destroy
+    @event.destroy
+    render json: 'ok', status: 200
   end
 
-  def course_events
-    @course = Course.find(params[:course_id])
-    @course_events = Course.where(category: @course)
-  end
+  private
+
+    def course_events
+      @course = Course.find(params[:course_id])
+      @course_events = Course.where(category: @course)
+    end
+
+    def event_params
+      params.require(:event).permit(
+        :employee_id,
+        :course_id,
+        :start_time,
+        :duration
+      )
+    end
 end

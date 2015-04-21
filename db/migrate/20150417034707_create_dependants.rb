@@ -1,7 +1,7 @@
 class CreateDependants < ActiveRecord::Migration
   def change
     create_table :dependants do |t|
-      t.references :client, index: true, foreign_key: true
+      t.references :client, index: true 
       t.string :first_name
       t.string :last_name
       t.date :birthday
