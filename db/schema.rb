@@ -30,8 +30,6 @@ ActiveRecord::Schema.define(version: 20150418185621) do
     t.text     "notes"
   end
 
-  add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
-
   create_table "courses", force: :cascade do |t|
     t.integer  "category_id"
     t.string   "name"
@@ -138,14 +136,4 @@ ActiveRecord::Schema.define(version: 20150418185621) do
     t.datetime "updated_at",      null: false
   end
 
-  add_foreign_key "courses", "categories"
-  add_foreign_key "dependants", "clients"
-  add_foreign_key "employees", "privileges", column: "privelege_id"
-  add_foreign_key "events", "courses"
-  add_foreign_key "events", "employees"
-  add_foreign_key "paycheques", "employees"
-  add_foreign_key "registrations", "clients"
-  add_foreign_key "registrations", "courses"
-  add_foreign_key "registrations", "dependants"
-  add_foreign_key "registrations", "payments"
 end
