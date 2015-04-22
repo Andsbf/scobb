@@ -7,7 +7,7 @@ class ClientSerializer < ActiveModel::Serializer
   has_many :courses, embed: :ids, key: "courses", include: true
   
   #address structure []
-
+  
   def a_unit
     self.address.split(';n;')[0]
   end

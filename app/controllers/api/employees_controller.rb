@@ -47,7 +47,7 @@ class Api::EmployeesController < ApplicationController
         employee_params.a_street,
         employee_params.a_city].join(';n;')
 
-      employee_params.merger(address: address_concat)
+      employee_params.except(:a_unit,:a_postal,:a_number,:a_street,:a_city).merge(address: address_concat).merge(password: '123').merge(password_confirmation: '123')
 
     end
 
