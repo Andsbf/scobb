@@ -20,7 +20,7 @@ class Api::ClientsController < ApplicationController
   def update
     @client = Client.find(params[:id])
 
-    if @client.update_attributes(client_params)
+    if @client.update_attributes(processed_client_params)
       render json: @client, status: 200
     else
       render json: {}, status: 400
