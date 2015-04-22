@@ -5,7 +5,10 @@ class Api::ClientsController < ApplicationController
   end
 
   def create
-    @client = Client.new(client_params)
+
+    processed_client_params
+    binding.pry
+    @client = Client.new(processed_client_params)
 
     if @client.save
       render json: @client, status: 200
@@ -37,10 +40,36 @@ class Api::ClientsController < ApplicationController
 
   private
 
+    def processed_client_params
+    
+      address_concat = [
+        client_params.a_unit,
+        client_params.a_postal,
+        client_params.a_number,
+        client_params.a_street,
+        client_params.a_city].join(',')
+
+      client_params.merger(address: address_concat)
+
+    end
+
     def client_params
       params.require(:client).permit(
-        :user_id,
-        :notes
+      :first_name,
+      :last_name,
+      :email,
+      :phone,
+      :phone_alternate,
+      :birthday,
+      :gender,
+      :a_unit,
+      :a_postal,
+      :a_number,
+      :a_street,
+      :a_city,
+      :notes,
+      :password,
+      :password_confirmation
       )
     end
 

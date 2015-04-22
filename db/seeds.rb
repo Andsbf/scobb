@@ -12,6 +12,7 @@ if Rails.env.development?
     gender: 'female',
     address: 'stanley park, DT Vancouver', 
     birthday: Faker::Date.between(35.years.ago, 25.years.ago),
+    notes: [Faker::Lorem.sentence, ""].sample,
     certification: 'Business owner',
     hourly_rate: '50',
     password:'123456', 
@@ -42,6 +43,7 @@ if Rails.env.development?
       address: Faker::Address.street_address,
       certification: Faker::Lorem.words.join(' '),
       hourly_rate: rand(20..30),
+      notes: [Faker::Lorem.sentence, ""].sample,
       password: "123456",
       password_confirmation: "123456"
     )
