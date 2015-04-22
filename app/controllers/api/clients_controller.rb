@@ -45,7 +45,7 @@ class Api::ClientsController < ApplicationController
         client_params[:a_postal],
         client_params[:a_number],
         client_params[:a_street],
-        client_params[:a_city]].join(',')
+        client_params[:a_city]].join(';n;')
 
       client_params.except(:a_unit,:a_postal,:a_number,:a_street,:a_city).merge(address: address_concat).merge(password: '123').merge(password_confirmation: '123')
       

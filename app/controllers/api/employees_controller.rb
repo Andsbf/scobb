@@ -45,7 +45,7 @@ class Api::EmployeesController < ApplicationController
         employee_params.a_postal,
         employee_params.a_number,
         employee_params.a_street,
-        employee_params.a_city].join(',')
+        employee_params.a_city].join(';n;')
 
       employee_params.merger(address: address_concat)
 

@@ -7,23 +7,23 @@ class EmployeeSerializer < ActiveModel::Serializer
 
   
   def a_unit
-    self.address.split(',')[0]
+    self.address.split(';n;')[0]
   end
 
   def a_postal
-    self.address.split(',')[1]
+    self.address.split(';n;')[1]
   end
 
   def a_number
-    self.address.split(',')[2]
+    self.address.split(';n;')[2]
   end
 
   def a_street
-    self.address.split(',')[3]
+    self.address.split(';n;')[3]
   end
 
   def a_city
-    self.address.split(',')[4]
+    self.address.split(';n;')[4]
   end
 
 end
