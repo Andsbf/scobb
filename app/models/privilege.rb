@@ -1,3 +1,3 @@
 class Privilege < ActiveRecord::Base
-  has_one :employee
+  belongs_to :employee
 end

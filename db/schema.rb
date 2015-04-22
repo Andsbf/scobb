@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418185621) do
+ActiveRecord::Schema.define(version: 20150422192216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,10 +24,18 @@ ActiveRecord::Schema.define(version: 20150418185621) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.text     "notes"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "phone_alternate"
+    t.datetime "birthday"
+    t.string   "gender"
+    t.string   "address"
+    t.string   "password_digest"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -57,13 +65,18 @@ ActiveRecord::Schema.define(version: 20150418185621) do
   create_table "employees", force: :cascade do |t|
     t.string   "certification"
     t.decimal  "hourly_rate"
-    t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "privelege_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "phone_alternate"
+    t.datetime "birthday"
+    t.string   "gender"
+    t.string   "address"
+    t.string   "password_digest"
   end
-
-  add_index "employees", ["privelege_id"], name: "index_employees_on_privelege_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.integer  "employee_id"
@@ -99,12 +112,15 @@ ActiveRecord::Schema.define(version: 20150418185621) do
 
   create_table "privileges", force: :cascade do |t|
     t.boolean  "privileges1"
-    t.boolean  "priveleges2"
-    t.boolean  "priveleges3"
-    t.boolean  "priveleges4"
+    t.boolean  "privileges2"
+    t.boolean  "privileges3"
+    t.boolean  "privileges4"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "employee_id"
   end
+
+  add_index "privileges", ["employee_id"], name: "index_privileges_on_employee_id", using: :btree
 
   create_table "registrations", force: :cascade do |t|
     t.integer  "payment_id"
@@ -119,21 +135,5 @@ ActiveRecord::Schema.define(version: 20150418185621) do
   add_index "registrations", ["course_id"], name: "index_registrations_on_course_id", using: :btree
   add_index "registrations", ["dependant_id"], name: "index_registrations_on_dependant_id", using: :btree
   add_index "registrations", ["payment_id"], name: "index_registrations_on_payment_id", using: :btree
-
-  create_table "users", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "phone"
-    t.string   "phone_alternate"
-    t.date     "birthday"
-    t.string   "gender"
-    t.string   "address"
-    t.text     "notes"
-    t.string   "user_type"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
 
 end
