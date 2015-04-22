@@ -39,19 +39,20 @@ class Api::EmployeesController < ApplicationController
   private
 
     def processed_employee_params
-    
+    binding.pry
       address_concat = [
-        employee_params.a_unit,
-        employee_params.a_postal,
-        employee_params.a_number,
-        employee_params.a_street,
-        employee_params.a_city].join(';n;')
-
+        employee_params[:a_unit],
+        employee_params[:a_postal],
+        employee_params[:a_number],
+        employee_params[:a_street],
+        employee_params[:a_city]].join(';n;')
+        binding.pry
       employee_params.except(:a_unit,:a_postal,:a_number,:a_street,:a_city).merge(address: address_concat).merge(password: '123').merge(password_confirmation: '123')
 
     end
 
     def employee_params
+      
       params.require(:employee).permit(
       :first_name,
       :last_name,
