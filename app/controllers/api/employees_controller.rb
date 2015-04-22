@@ -67,9 +67,9 @@ class Api::EmployeesController < ApplicationController
       :a_city,
       :notes,
       :password,
-      :password_confirmation
+      :password_confirmation,
       :certification,
-      :hourly_rate,
+      :hourly_rate
       )
     end
 end

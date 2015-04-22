@@ -5,9 +5,7 @@ class Api::ClientsController < ApplicationController
   end
 
   def create
-
-    processed_client_params
-    binding.pry
+    
     @client = Client.new(processed_client_params)
 
     if @client.save
@@ -29,7 +27,7 @@ class Api::ClientsController < ApplicationController
 
   def show
     @client = Client.find(params[:id])
-    render json: @client 
+    render json: @client
   end
 
   def destroy
@@ -41,19 +39,21 @@ class Api::ClientsController < ApplicationController
   private
 
     def processed_client_params
-    
+      
       address_concat = [
-        client_params.a_unit,
-        client_params.a_postal,
-        client_params.a_number,
-        client_params.a_street,
-        client_params.a_city].join(',')
+        client_params[:a_unit],
+        client_params[:a_postal],
+        client_params[:a_number],
+        client_params[:a_street],
+        client_params[:a_city]].join(',')
 
-      client_params.merger(address: address_concat)
+      client_params.except(:a_unit,:a_postal,:a_number,:a_street,:a_city).merge(address: address_concat).merge(password: '123').merge(password_confirmation: '123')
+      
 
     end
 
     def client_params
+      
       params.require(:client).permit(
       :first_name,
       :last_name,
