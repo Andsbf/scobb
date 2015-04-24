@@ -4,9 +4,9 @@ Rails.application.routes.draw do
 
     resources :categories 
 
-    resources :courses do |i|
-        resources :events
-      end
+    resources :courses 
+        
+    resources :events
 
     resources :employees do |i|
       resources :privileges
@@ -18,17 +18,15 @@ Rails.application.routes.draw do
 
     resources :registrations
 
-    resources :clients do |i|
-        resources :dependants
-    end
+    resources :dependants
+
+    resources :clients
 
     resources :employees
 
     resources :users
 
     # access to all nested resources
-    get '/dependants', to: 'dependants#all', as: 'dependants'
-    get '/events', to: 'events#all', as: 'events'
     
   end
   

@@ -1,14 +1,7 @@
 class Api::EventsController < ApplicationController
-  before_action :course_events
-  skip_before_action :course_events, only: [:all]
-
-  def all
-    @events = Event.all
-    render json: @events, status: 200
-  end
 
   def index
-    @events = @course_events
+    @events = Event.all
      render json: @events, status: 200
   end
 
@@ -33,7 +26,7 @@ class Api::EventsController < ApplicationController
   end
 
   def show
-    @event = @course_events.find(params[:id])
+    @event = Event.find(params[:id])
     render json: @event
   end
 
@@ -44,11 +37,6 @@ class Api::EventsController < ApplicationController
   end
 
   private
-
-    def course_events
-      @course = Course.find(params[:course_id])
-      @course_events = Course.where(category: @course)
-    end
 
     def event_params
       params.require(:event).permit(

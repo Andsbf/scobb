@@ -5,7 +5,6 @@ class Api::ClientsController < ApplicationController
   end
 
   def create
-    
     @client = Client.new(processed_client_params)
 
     if @client.save

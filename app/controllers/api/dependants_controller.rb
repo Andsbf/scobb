@@ -1,15 +1,8 @@
 class Api::DependantsController < ApplicationController  
-  
-  before_action :load_client
-  skip_before_action :load_client, only: [:all]
 
-  def all
-    @dependants = Dependant.all
-    render json: @dependants
-  end
   #display all for parent client_id
   def index
-    @dependants = Dependant.where(client: @client)
+    @dependants = Dependant.all
     render json: @dependants
   end
 
@@ -45,10 +38,6 @@ class Api::DependantsController < ApplicationController
   end
 
   private
-
-    def load_client
-      @client = Client.find(params[:client_id])
-    end
 
     def dependant_params
       params.require(:dependant).permit(
