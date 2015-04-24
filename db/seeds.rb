@@ -85,17 +85,23 @@ if Rails.env.development?
 
 
   #creating courses categories with at least one course and some events
+  i = 0
   5.times do |i|
+    i += 1
     categories << Category.create!(
-      title: Faker::Company.name,
+      title: "Category #{i}",
       description: Faker::Lorem.sentence(10)
     )
+    counter = 0
+
     rand(1..3).times do |id|
+      counter += 1
       courses << Course.create!(
         category: categories.last,
-        name: Faker::Company.name,
+        name: "#{categories.last.title} level #{counter}",
         capacity: rand(10..25),
-        session_cost: rand(70..80)
+        session_cost: rand(70..80),
+        level: counter
       )
     
 
