@@ -2,11 +2,11 @@ Rails.application.routes.draw do
 
   namespace  :api do
 
-    resources :categories do |i|
-      resources :courses do |i|
+    resources :categories 
+
+    resources :courses do |i|
         resources :events
       end
-    end
 
     resources :employees do |i|
       resources :privileges
@@ -27,7 +27,6 @@ Rails.application.routes.draw do
     resources :users
 
     # access to all nested resources
-    get '/courses', to: 'courses#all', as: 'courses'
     get '/dependants', to: 'dependants#all', as: 'dependants'
     get '/events', to: 'events#all', as: 'events'
     
