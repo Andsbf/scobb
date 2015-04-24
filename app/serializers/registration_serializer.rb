@@ -1,6 +1,21 @@
 class RegistrationSerializer < ActiveModel::Serializer
-  attributes(*Registration.attribute_names.map(&:to_sym))
+  attributes(*Registration.attribute_names.map(&:to_sym),:dependant, :client, :payment, :course)
 
-   # has_one :dependant, embed: :ids, key: "dependant"#, include: true
-   # has_one :payment, embed: :ids, key: "payment"#, include: true
+
+
+   def dependant
+     self.dependant_id
+   end
+
+   def client
+     self.client_id
+   end
+   
+   def payment
+     self.payment_id
+   end
+
+   def course
+     self.course_id
+   end
 end
