@@ -3,8 +3,6 @@ class DependantSerializer < ActiveModel::Serializer
 
   has_many :registrations, embed: :ids, key: "registrations"#, include: true
 
-  # has_one :client, serializer: ClientWoEmbedSerializer
-
   def client
     self.client_id
   end
