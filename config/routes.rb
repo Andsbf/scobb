@@ -8,9 +8,9 @@ Rails.application.routes.draw do
         
     resources :events
 
-    resources :employees do |i|
-      resources :privileges
-    end
+    resources :employees 
+          
+    resources :privileges
 
     resources :paycheques
 
@@ -23,8 +23,6 @@ Rails.application.routes.draw do
     resources :clients
 
     resources :employees
-
-    resources :users
 
     # access to all nested resources
     

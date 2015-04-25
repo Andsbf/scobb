@@ -1,6 +1,8 @@
 class RegistrationSerializer < ActiveModel::Serializer
   attributes(*Registration.attribute_names.map(&:to_sym),:dependant, :client, :payment, :course)
 
+  has_one :course
+
    def dependant
      self.dependant_id
    end
