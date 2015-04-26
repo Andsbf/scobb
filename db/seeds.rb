@@ -122,18 +122,44 @@ if Rails.env.development?
     @course = courses.sample
     @cost = @course.events.length * @course.session_cost
 
-    rand(1..2).times do |i|
+    if client.dependants.any?
+
+      client.dependants.each do |dependant|
+
+      @course = courses.sample
+      @cost = @course.events.length * @course.session_cost
+      
       payments << Payment.create!(
-        date: Faker::Date.forward(1),
+        date: Faker::Date.backward(180),
         total: @cost
-        )
-    
+      )
+
+
       registrations << Registration.create!(
         payment: payments.last,
         client: client,
-        dependant: [client.dependants.sample, nil].sample,
+        dependant: dependant,
         course: @course
       )
+      end
+
+    else
+      
+      @course = courses.sample
+      @cost = @course.events.length * @course.session_cost
+      
+      payments << Payment.create!(
+        date: Faker::Date.backward(180),
+        total: @cost
+      )
+
+
+      registrations << Registration.create!(
+        payment: payments.last,
+        client: client,
+        dependant: nil,
+        course: @course
+      )  
     end
   end
 
