@@ -92,15 +92,17 @@ if Rails.env.development?
       title: "Category #{i}",
       description: Faker::Lorem.sentence(10)
     )
+
     counter = 0
 
     rand(1..3).times do |id|
       counter += 1
       courses << Course.create!(
         category: categories.last,
-        name: "#{categories.last.title} level #{counter}",
+        name: "level #{counter}",
         capacity: rand(10..25),
         session_cost: rand(70..80),
+        description: Faker::Lorem.sentence(10),
         level: counter
       )
     
@@ -141,7 +143,10 @@ if Rails.env.development?
         dependant: dependant,
         course: @course
       )
-      end
+      a = registrations.last
+      a.created_at = payments.last.date
+      a.save
+      end 
 
     else
       
@@ -160,6 +165,9 @@ if Rails.env.development?
         dependant: nil,
         course: @course
       )  
+      a = registrations.last
+      a.created_at = payments.last.date
+      a.save
     end
   end
 
