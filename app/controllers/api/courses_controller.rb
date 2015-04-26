@@ -9,7 +9,13 @@ class Api::CoursesController < ApplicationController
   # end
 
   def index
-   @courses = Course.all
+
+    if params[:limit].present?
+      @courses = Course.limit(params[:limit]).order('random()')
+    else
+      @courses = Course.all.order(created_at: :desc)
+    end
+
    render json: @courses
   end
 
