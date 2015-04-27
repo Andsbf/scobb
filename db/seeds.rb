@@ -56,7 +56,7 @@ if Rails.env.development?
   end
 
   #creating clients w/ 0 or up to 2 dependants
-  30.times do |i|
+  60.times do |i|
     clients << Client.create!(
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
@@ -100,10 +100,12 @@ if Rails.env.development?
       courses << Course.create!(
         category: categories.last,
         name: "level #{counter}",
-        capacity: rand(10..25),
+        capacity: rand(10..15),
         session_cost: rand(70..80),
         description: Faker::Lorem.sentence(10),
-        level: counter
+        level: counter,
+        is_full: false,
+        num_students: 0
       )
     
 
@@ -129,8 +131,14 @@ if Rails.env.development?
       client.dependants.each do |dependant|
 
       @course = courses.sample
-      @cost = @course.events.length * @course.session_cost
       
+      while @course.is_full
+        @course = courses.sample        
+      end
+
+      @cost = @course.events.length * @course.session_cost
+      @course.num_students += 1
+      @course.save
       payments << Payment.create!(
         date: Faker::Date.backward(180),
         total: @cost
@@ -151,6 +159,7 @@ if Rails.env.development?
     else
       
       @course = courses.sample
+
       @cost = @course.events.length * @course.session_cost
       
       payments << Payment.create!(

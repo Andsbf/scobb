@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
     resources :employees
 
+    resources :dashboards, only: [:index]
+
     # access to all nested resources
     
   end
