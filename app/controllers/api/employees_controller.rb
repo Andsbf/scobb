@@ -27,7 +27,7 @@ class Api::EmployeesController < ApplicationController
 
   def show
     @employee = Employee.find(params[:id])
-    render json: @employee
+    render json: @employee, serializer: EmployeeUnitSerializer
   end
 
   def destroy

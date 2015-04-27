@@ -68,7 +68,8 @@ if Rails.env.development?
       address: "#{[rand(100..9999),''].sample};n; #{Faker::Address.postcode};n; #{Faker::Address.building_number};n; #{Faker::Address.street_address};n;#{Faker::Address.city}",
       notes: [Faker::Lorem.sentence, ""].sample,
       password: "123456",
-      password_confirmation: "123456"
+      password_confirmation: "123456",
+      dependants_name: ''
     )
 
     rand(0..2).times do |i|
@@ -80,7 +81,15 @@ if Rails.env.development?
       gender: ['male', 'female'].sample,
       notes: [Faker::Lorem.sentence, ""].sample
       )
+      
+      a = clients.last
+      a.dependants_name  << "#{dependants.last.first_name},"
+      a.save
     end
+
+    
+    
+
   end
 
 
@@ -139,6 +148,7 @@ if Rails.env.development?
       @cost = @course.events.length * @course.session_cost
       @course.num_students += 1
       @course.save
+
       payments << Payment.create!(
         date: Faker::Date.backward(180),
         total: @cost
@@ -161,7 +171,9 @@ if Rails.env.development?
       @course = courses.sample
 
       @cost = @course.events.length * @course.session_cost
-      
+      @course.num_students += 1
+      @course.save
+
       payments << Payment.create!(
         date: Faker::Date.backward(180),
         total: @cost
@@ -174,6 +186,7 @@ if Rails.env.development?
         dependant: nil,
         course: @course
       )  
+
       a = registrations.last
       a.created_at = payments.last.date
       a.save

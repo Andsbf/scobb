@@ -1,7 +1,7 @@
 class Api::ClientsController < ApplicationController
   def index
     @clients = Client.all
-    render json: @clients 
+    render json: @clients ,status: 200
   end
 
   def create
@@ -26,7 +26,7 @@ class Api::ClientsController < ApplicationController
 
   def show
     @client = Client.find(params[:id])
-    render json: @client
+    render json: @client, serializer: ClientUnitSerializer
   end
 
   def destroy
