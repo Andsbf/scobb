@@ -5,7 +5,7 @@ class Api::DashboardsController < ApplicationController
     num_registrations = Registration.count
     capacity_ratio = (((Course.all.pluck(:num_students).sum+0.0))/Course.all.pluck(:capacity).sum).round(2)
     num_students = (Dependant.count + (Registration.all.where(dependant_id: nil).pluck(:client_id).uniq).length)
-
+    last_registrations = registrations_last
 
     chart1 = {
       labels: Category.all.order('id').pluck('title'),
@@ -22,20 +22,21 @@ class Api::DashboardsController < ApplicationController
         };
 
     chart2 = {
-    labels: registrations_months,
-    datasets: [
+      labels: registrations_months,
+      datasets: [
         {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: registrations_months_values
+          label: "My Second dataset",
+          fillColor: "rgba(151,187,205,0.2)",
+          strokeColor: "rgba(151,187,205,1)",
+          pointColor: "rgba(151,187,205,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          data: registrations_months_values
         }
-    ]
-};
+      ]
+    };
+
     render json: {dashboards: [
      {id: 1, 
       total_revenue: total_revenue,
@@ -43,7 +44,8 @@ class Api::DashboardsController < ApplicationController
       capacity_ratio: capacity_ratio,
       num_students: num_students,
       chart1: chart1,
-      chart2: chart2
+      chart2: chart2,
+      last_registrations: last_registrations
       }
     ]}
   end
@@ -64,16 +66,22 @@ class Api::DashboardsController < ApplicationController
     
     months = Hash.new(0)
     a.each do |date|
-      display_month = month_name(date.month)
-      months["#{date.year},#{display_month}"] += 1
+      
+      months["#{date.year},#{date.month}"] += 1
     end
-    months.sort
+    months = months.sort
+
+
   end
 
   def registrations_months
     a = registrations_dates
     
-    a.map {|month| month[0]}
+    a.map do|month| 
+
+      month_name(month[0].split(',')[1].to_i)
+
+    end
   end
 
   def registrations_months_values
@@ -84,6 +92,18 @@ class Api::DashboardsController < ApplicationController
 
   def month_name(month_num)
     ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][month_num-1]
+  end
+
+  def registrations_last
+    a = Registration.order(created_at: :desc).limit(10).joins(course: :category).joins(:client).pluck('courses.name,clients.first_name,registrations.created_at, categories.title, registrations.id')
+    a = a.map do |reg| 
+      [
+        "#{reg[3]} - #{reg[0]}",
+        reg[1],
+        "#{month_name(reg[2].month)},#{reg[2].day}",
+        reg[4]
+      ]
+    end
   end
   
 end
