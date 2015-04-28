@@ -3,7 +3,7 @@ class Api::DashboardsController < ApplicationController
   def index
     total_revenue = Payment.all.pluck(:total).sum
     num_registrations = Registration.count
-    capacity_ratio = (((Course.all.pluck(:num_students).sum+0.0))/Course.all.pluck(:capacity).sum).round(2)
+    capacity_ratio = ((((Course.all.pluck(:num_students).sum+0.0))/Course.all.pluck(:capacity).sum).round(2))*100
     num_students = (Dependant.count + (Registration.all.where(dependant_id: nil).pluck(:client_id).uniq).length)
     last_registrations = registrations_last
 
