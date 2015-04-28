@@ -23,7 +23,7 @@ class Api::CoursesController < ApplicationController
     @course = Course.new(course_params)
 
     if @course.save
-      render json: @dependant, status: 200
+      render json: @course, status: 200
     else
       render json: {}, status: 400
     end
@@ -58,11 +58,13 @@ class Api::CoursesController < ApplicationController
   # end
 
   def course_params
-    params.require(:course).permit(
+    a = params.require(:course).permit(
       :category_id,
       :name,
       :capacity,
-      :session_cost
+      :session_cost,
     )
+
+     a.merge(category_id: params[:course][:category].to_i)
   end
 end
