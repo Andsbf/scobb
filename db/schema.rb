@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427173228) do
+ActiveRecord::Schema.define(version: 20150428035047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,12 +44,12 @@ ActiveRecord::Schema.define(version: 20150427173228) do
     t.string   "name"
     t.integer  "capacity"
     t.decimal  "session_cost"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "level"
-    t.text     "description"
-    t.integer  "num_students"
-    t.boolean  "is_full"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "level",        default: 0
+    t.text     "description",  default: ""
+    t.integer  "num_students", default: 0
+    t.boolean  "is_full",      default: false
   end
 
   add_index "courses", ["category_id"], name: "index_courses_on_category_id", using: :btree
