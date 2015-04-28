@@ -63,6 +63,9 @@ class Api::CoursesController < ApplicationController
       :name,
       :capacity,
       :session_cost,
+      :level,
+      :description
+
     )
 
      a.merge(category_id: params[:course][:category].to_i)
