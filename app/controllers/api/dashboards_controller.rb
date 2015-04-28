@@ -95,7 +95,7 @@ class Api::DashboardsController < ApplicationController
   end
 
   def registrations_last
-    a = Registration.order(created_at: :desc).limit(10).joins(course: :category).joins(:client).pluck('courses.name,clients.first_name,registrations.created_at, categories.title, registrations.id')
+    a = Registration.order(created_at: :desc).limit(5).joins(course: :category).joins(:client).pluck('courses.name,clients.first_name,registrations.created_at, categories.title, registrations.id')
     a = a.map do |reg| 
       [
         "#{reg[3]} - #{reg[0]}",

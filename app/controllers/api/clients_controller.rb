@@ -26,7 +26,7 @@ class Api::ClientsController < ApplicationController
 
   def show
     @client = Client.find(params[:id])
-    render json: @client, serializer: ClientUnitSerializer
+    render json: @client, serializer: ClientUnitSerializer,  root: "client"
   end
 
   def destroy
