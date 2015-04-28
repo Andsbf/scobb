@@ -5,6 +5,7 @@ class ClientUnitSerializer < ActiveModel::Serializer
   has_many :registrations, embed: :ids, key: "registrations"#, include: true
   has_many :payments, embed: :ids, key: "payments"#, include: true
   has_many :courses, embed: :ids, key: "courses"#, include: true
+  has_many :events, embed: :ids, key: "events"#, include: true
   
   #address structure []
   
@@ -28,6 +29,5 @@ class ClientUnitSerializer < ActiveModel::Serializer
     self.address.split(';n;')[4]
   end
 end
-
 
 
