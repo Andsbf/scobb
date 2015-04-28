@@ -97,9 +97,10 @@ if Rails.env.development?
   i = 0
   5.times do |i|
     i += 1
+    cats = ['Private', 'Camp', 'Group', 'Semi-private', 'Adult', 'Private']
     categories << Category.create!(
-      title: "Category #{i}",
-      description: Faker::Lorem.sentence(10)
+      title: cats[i],
+      description: "All group lessons are a maximum of 5 swimmers, with exclusive use of the pool. This creates a calm, focused, fun environment for learning! To see more about our pool, click here!"
     )
 
     counter = 0
@@ -108,10 +109,10 @@ if Rails.env.development?
       counter += 1
       courses << Course.create!(
         category: categories.last,
-        name: "level #{counter}",
+        name: ["Mom and Tot - Level#{counter}","Swim Kids - Level#{counter}", "Aquasize - Level#{counter}", "Learning Together - Level#{counter}", "Syncronized Swimming - Level#{counter}", "Preschool - Level#{counter}"].sample,
         capacity: rand(10..15),
-        session_cost: rand(70..80),
-        description: Faker::Lorem.sentence(10),
+        session_cost: rand(30..45),
+        description: "Through games, drills, and safety instruction, swimmers will learn how to have fun & be safe while moving longer distances independently. Using their kicks, floats, glides, and breathing, swimmers will begin to swim short distances unassisted.",
         level: counter,
         is_full: false,
         num_students: 0
