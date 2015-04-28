@@ -182,6 +182,7 @@ if Rails.env.development?
 
       @cost = @course.events.length * @course.session_cost
       @course.num_students += 1
+      @course.is_full = true if (@course.num_students == @course.capacity)
       @course.save
 
       payments << Payment.create!(
