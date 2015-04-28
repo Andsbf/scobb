@@ -129,6 +129,14 @@ if Rails.env.development?
     end
   end
 
+  courses.each do |course| 
+
+    course.startDate = course.events.order(:start_time).first.start_time
+    course.endDate = course.events.order(:start_time).last.start_time
+    course.save
+
+  end
+
 
   #associatin clients to registrations/courses
   clients.each do |client|
@@ -147,6 +155,7 @@ if Rails.env.development?
 
       @cost = @course.events.length * @course.session_cost
       @course.num_students += 1
+      @course.is_full = true if (@course.num_students == @course.capacity)
       @course.save
 
       payments << Payment.create!(
